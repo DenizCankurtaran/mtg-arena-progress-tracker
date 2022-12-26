@@ -21,17 +21,19 @@
 
 <div class="flex">
 	{#each manas as mana}
-		<div class="relative flex">
+		<div
+			class="relative flex cursor-pointer"
+			on:click={() => handleClick(mana)}
+			on:keydown={() => handleClick(mana)}
+		>
 			<div
-				class={`absolute ${
-					selectedMana.includes(mana) ? 'rounded-lg w-3 h-3 inset-3.5 z-0 bg-yellow-300 blur' : ''
+				class={`absolute rounded-lg ${
+					selectedMana.includes(mana)
+						? 'bg-yellow-300 w-3 h-3 inset-3.5 z-0 blur'
+						: 'bg-black z-20 w-4 h-4 inset-3 opacity-50'
 				}`}
 			/>
-			<span
-				class="cursor-pointer p-3 z-10"
-				on:click={() => handleClick(mana)}
-				on:keydown={() => handleClick(mana)}
-			>
+			<span class="p-3 z-10">
 				<img class="h-4 w-4" src={`/images/${mana}.svg`} alt={mana} />
 			</span>
 		</div>
