@@ -9,11 +9,6 @@ export const POST: RequestHandler = async ({ request }) => {
 	const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
 	const sheets = google.sheets({ version: 'v4', auth });
 
-	const resource = {
-		id: 'test',
-		date: JSON.stringify(new Date())
-	}
-
 	const response = await sheets.spreadsheets.values.append({
 		spreadsheetId: SHEET_ID,
 		range: 'Sheet1!A:C',

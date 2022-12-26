@@ -1,6 +1,8 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
 import { google } from 'googleapis';
 import { GOOGLE_APPLICATION_CREDENTIALS, SHEET_ID } from '$env/static/private';
+import { matches } from '$lib/store/stores';
+import {isMatches } from '$lib/store/types';
  
 /** @type {import('./$types').RequestHandler} */
 export const GET: RequestHandler = async ({ request }) => {
@@ -9,15 +11,19 @@ export const GET: RequestHandler = async ({ request }) => {
 	const auth = await google.auth.getClient({scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly']});
 	const sheets = google.sheets({version: 'v4', auth});
 
-	const range = `Sheet1!A1:B1`;
+	const range = `Sheet1!A:E`;
 
 	const response = await sheets.spreadsheets.values.get({
 		spreadsheetId: SHEET_ID,
 		range,
-
+		majorDimension: 'ROWS'
 	})
-	console.log(response.data.values);
+	// console.log(response.status, response.data);
 	
 
-  return json({ status: 200, body: response.data.values })
+	if (!response.data.values) {
+  		return json({ status: response.status })
+	}
+
+	return json({ status: 200, body: response.data.values })
 }
