@@ -1,4 +1,4 @@
-import type { Match } from '$lib/store/types';
+import type { Match } from '$lib/util/types';
 import type { Load } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 

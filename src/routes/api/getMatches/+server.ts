@@ -1,8 +1,6 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
 import { google } from 'googleapis';
 import { GOOGLE_APPLICATION_CREDENTIALS, SHEET_ID } from '$env/static/private';
-import { matches } from '$lib/store/stores';
-import {isMatches } from '$lib/store/types';
  
 /** @type {import('./$types').RequestHandler} */
 export const GET: RequestHandler = async ({ request }) => {

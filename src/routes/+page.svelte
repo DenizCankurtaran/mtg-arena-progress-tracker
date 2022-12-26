@@ -24,5 +24,10 @@
 		</div>
 
 	</div>
-	<MatchTable matches={$page.data.matches} />
+
+	<div class="flex justify-center overflow-y-auto h-[50vh]">
+
+		<MatchTable matches={$page.data.matches} />
+
+	</div>
 </div>
