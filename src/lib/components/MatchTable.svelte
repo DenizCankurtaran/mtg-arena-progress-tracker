@@ -77,7 +77,7 @@
 </script>
 
 
-<div class="flex flex-col justify-center w-1/4 mx-auto">
+<div class="flex flex-col justify-center w-1/2 lg:w-1/4 mx-auto">
 	<ManaSelector on:changeMana={changeMana} />
 	<div class="overflow-y-auto h-[50vh]">
 
