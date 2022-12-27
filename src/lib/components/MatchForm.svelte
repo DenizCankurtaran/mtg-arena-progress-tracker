@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import type { Mana } from '$lib/util/types';
+	import type { Mana, Result } from '$lib/util/types';
 	import ManaSelector from './ManaSelector.svelte';
 
 	let selectedMana: Mana[] = [];
 	let valid = false;
 
-	const saveMatch = async (result: 'WIN' | 'LOSS') => {
+	const saveMatch = async (result: Result) => {
 		if (!valid) {
 			return;
 		}

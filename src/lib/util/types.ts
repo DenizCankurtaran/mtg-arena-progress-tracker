@@ -1,5 +1,12 @@
 export type Match = string[]
 
+export type Rank = string[]
+
+export type Stats = {
+	matches: Match[],
+	ranks: Rank[]
+}
+
 export const isMatch = (match: any[]): match is Match => match.every(el => typeof el === "string")
 
 export const isMatches = (matches: any[][]): matches is Match[] => matches.every(el => isMatch(el))
@@ -19,3 +26,5 @@ export enum SortLevel {
 }
 
 export type Mana = 'white' | 'black' | 'green' | 'red' | 'blue'
+
+export type Result = 'WIN' | 'LOSS'

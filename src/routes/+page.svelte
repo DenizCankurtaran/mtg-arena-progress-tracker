@@ -7,7 +7,7 @@
 
 <div>
 	<div class="flex justify-center gap-x-12 my-6">
-		<Rank rank="d3" step={1} />
+		<Rank ranks={$page.data.ranks} />
 		<MatchForm />
 	</div>
 
