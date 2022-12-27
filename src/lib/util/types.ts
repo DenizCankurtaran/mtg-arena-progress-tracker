@@ -12,4 +12,10 @@ export enum Column {
 	WINRATE = 4
 }
 
+export enum SortLevel {
+	OFF = 0,
+	DESC = 1,
+	ASC = 2,
+}
+
 export type Mana = 'white' | 'black' | 'green' | 'red' | 'blue'

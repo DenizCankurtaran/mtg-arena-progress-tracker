@@ -1,33 +1,15 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import MatchTable from '$lib/components/MatchTable.svelte';
+	import MatchForm from '$lib/components/MatchForm.svelte';
+	import MatchTable from '$lib/components/Matchtable.svelte';
 	import Rank from '$lib/components/Rank.svelte';
-
-	async function saveMatch() {
-		const response = await fetch('/api/saveMatch', {
-			method: 'POST',
-			body: JSON.stringify({}),
-			headers: {
-				'content-type': 'application/json'
-			}
-		});
-		await response.json();
-	}
 </script>
 
 <div>
-	<div class="grid grid-cols-2">
+	<div class="flex justify-center gap-x-12 my-6">
 		<Rank rank="d3" step={1} />
-
-		<div class="text-red-400">
-			<button on:click={saveMatch}> Add match</button>
-		</div>
-
+		<MatchForm />
 	</div>
 
-	<div class="flex justify-center overflow-y-auto h-[50vh]">
-
-		<MatchTable matches={$page.data.matches} />
-
-	</div>
+	<MatchTable matches={$page.data.matches} />
 </div>

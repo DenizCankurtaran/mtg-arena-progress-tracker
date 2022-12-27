@@ -2,10 +2,9 @@
 	import type { Mana } from '$lib/util/types';
 	import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher<{ changeMana: Mana[] }>();
+	export let size: 'sm' | 'md' | 'lg' = 'sm';
 
-	let manas: Mana[] = ['white', 'black', 'green', 'red', 'blue'];
-	const selectedMana: Mana[] = [];
+	const dispatch = createEventDispatcher<{ changeMana: Mana[] }>();
 
 	const handleClick = (mana: Mana) => {
 		if (selectedMana.includes(mana)) {
@@ -17,6 +16,41 @@
 		manas = manas;
 		dispatch('changeMana', selectedMana);
 	};
+
+	const getStyle = () => {
+		if (size === 'md') {
+			return {
+				height: 'h-6',
+				width: 'w-6',
+				inset: 'inset-3',
+				glowHeight: 'h-5',
+				glowWidth: 'w-5',
+				glowInset: 'inset-3.5'
+			};
+		} else if (size === 'lg') {
+			return {
+				height: 'h-10',
+				width: 'w-10',
+				inset: 'inset-3',
+				glowHeight: 'h-10',
+				glowWidth: 'w-10',
+				glowInset: 'inset-3'
+			};
+		}
+		return {
+			height: 'h-4',
+			width: 'w-4',
+			inset: 'inset-3',
+			glowHeight: 'h-3',
+			glowWidth: 'w-3',
+			glowInset: 'inset-3.5'
+		};
+	};
+
+	let manas: Mana[] = ['white', 'black', 'green', 'red', 'blue'];
+	const selectedMana: Mana[] = [];
+
+	const style = getStyle();
 </script>
 
 <div class="flex">
@@ -27,14 +61,14 @@
 			on:keydown={() => handleClick(mana)}
 		>
 			<div
-				class={`absolute rounded-lg ${
+				class={`absolute rounded-full ${
 					selectedMana.includes(mana)
-						? 'bg-yellow-300 w-3 h-3 inset-3.5 z-0 blur'
-						: 'bg-black z-20 w-4 h-4 inset-3 opacity-50'
+						? `bg-yellow-300 ${style.glowHeight} ${style.glowWidth} ${style.glowInset} z-0 blur`
+						: `bg-black z-20 ${style.height} ${style.width} ${style.inset} opacity-50`
 				}`}
 			/>
 			<span class="p-3 z-10">
-				<img class="h-4 w-4" src={`/images/${mana}.svg`} alt={mana} />
+				<img class={`${style.height} ${style.width}`} src={`/images/${mana}.svg`} alt={mana} />
 			</span>
 		</div>
 	{/each}
