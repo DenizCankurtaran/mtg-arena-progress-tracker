@@ -1,10 +1,12 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import type { Mana, Result } from '$lib/util/types';
+	import type { Mana, Result, Stats } from '$lib/util/types';
+	import { createEventDispatcher } from 'svelte';
 	import ManaSelector from './ManaSelector.svelte';
 
 	let selectedMana: Mana[] = [];
 	let valid = false;
+
+	const dispatch = createEventDispatcher();
 
 	const saveMatch = async (result: Result) => {
 		if (!valid) {
@@ -24,7 +26,7 @@
 		console.log(responseResult);
 		
 		if (responseResult.status === 200) {
-			goto('/', { replaceState: true });
+			dispatch('refresh');
 		}
 	};
 
