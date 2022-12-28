@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import MatchForm from '$lib/components/MatchForm.svelte';
-	import MatchTable from '$lib/components/Matchtable.svelte';
+	import MatchTable from '$lib/components/MatchTable.svelte';
 	import Rank from '$lib/components/Rank.svelte';
 
 	$: ranks = $page.data.ranks;
