@@ -14,7 +14,7 @@ export default async (stats: Stats, matchUp: Match, result: Result) => {
 	const response = await sheets.spreadsheets.values.batchUpdate({
 		spreadsheetId: SHEET_ID,
 		requestBody: {
-			valueInputOption: 'RAW',
+			valueInputOption: 'USER_ENTERED',
 			data: [
 				{
 					majorDimension: 'ROWS',
