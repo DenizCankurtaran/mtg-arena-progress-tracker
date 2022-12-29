@@ -77,7 +77,7 @@
 </script>
 
 
-<div class="flex flex-col justify-center w-1/2 lg:w-1/4 mx-auto">
+<div class="flex flex-col justify-center w-full md:w-1/2 p-3 sm:p-0 mx-auto">
 	<ManaSelector on:changeMana={changeMana} />
 	<div class="overflow-y-auto h-[50vh]">
 
@@ -85,7 +85,7 @@
 			<thead class="border-b">
 				{#each matches[0] as header, i}
 					<th
-						class={`font-medium text-gray-100 px-4 py-2 ${
+						class={`font-medium text-gray-100 px-0 sm:px-4 py-2 ${
 							i === Column.COLOR ? '' : 'cursor-pointer'
 						}`}
 						on:click={() => filterByColumn(i)}
@@ -99,7 +99,7 @@
 				{#each tableBody as row}
 					<tr class="border-b">
 						{#each row as col, i}
-							<td class="font-medium px-4 py-2 whitespace-nowrap text-center">
+							<td class="font-medium px-0 sm:px-4 py-2 whitespace-nowrap text-center">
 								{@html renderColumn(col, i)}
 							</td>
 						{/each}
