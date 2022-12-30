@@ -24,7 +24,7 @@ export default async (stats: Stats, matchUp: Match, result: Result) => {
 							1,
 							result === 'WIN' ? 1 : 0,
 							result === 'LOSS' ? 1 : 0,
-							result === 'WIN' ? 100 : 0
+							result === 'WIN' ? 100.00 : 0.00
 						]
 					],
 					range: `${SHEET_NAME}!A${stats.matches.length + 1}:E${stats.matches.length + 1}`

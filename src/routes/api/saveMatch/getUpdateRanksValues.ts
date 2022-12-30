@@ -100,7 +100,7 @@ export default (stats: Stats, result: Result) => {
 				result === 'WIN' ? 1 : 0,
 				result === 'LOSS' ? 1 : 0,
 				1,
-				result === 'WIN' ? 100 : 0
+				result === 'WIN' ? 100.00 : 0.00
 			]
 		};
 	} else {
