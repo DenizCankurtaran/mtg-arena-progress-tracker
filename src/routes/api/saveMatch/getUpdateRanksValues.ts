@@ -11,7 +11,8 @@ const calculateTier = (oldTier: Number, result: Result) => {
 				return '4';
 			case 4:
 				return '4';
-			default: return ''
+			default:
+				return '';
 		}
 	} else {
 		switch (oldTier) {
@@ -23,7 +24,8 @@ const calculateTier = (oldTier: Number, result: Result) => {
 				return '1';
 			case 1:
 				return '4';
-			default: return ''
+			default:
+				return '';
 		}
 	}
 };
@@ -40,7 +42,8 @@ const calculateRank = (rank: string) => {
 			return 'd';
 		case 'd':
 			return 'm';
-		default: return ''
+		default:
+			return '';
 	}
 };
 
@@ -64,10 +67,9 @@ const getNewRank = (currentRank: string, result: Result) => {
 		}
 	}
 
-
-	let increaseRate = 1
+	let increaseRate = 1;
 	if (rank.startsWith('b') || rank.startsWith('s') || rank.startsWith('g')) {
-		increaseRate = 2
+		increaseRate = 2;
 	}
 
 	const newSteps = steps + increaseRate;

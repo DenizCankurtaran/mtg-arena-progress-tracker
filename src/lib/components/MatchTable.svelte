@@ -1,17 +1,18 @@
 <script lang="ts">
+	import { filterByMana, sortMatchesAsc, sortMatchesDesc } from '$lib/util/filterMatches';
 	import { Column, SortLevel, type Mana, type Match } from '$lib/util/types';
 	import FilterChevron from './FilterChevron.svelte';
 	import ManaSelector from './ManaSelector.svelte';
 
 	export let matches: Match[];
 
-	let selectedMana: Mana[] = [];
+	export let selectedMana: Mana[] = [];
 	let sortLevel = SortLevel.OFF;
-	let currentIndex: Column;
+	let currentColumnIndex: Column;
 	$: tableBody = filterTableForMana(selectedMana);
 
-	const renderColumn = (column: string, index: number) => {
-		if (index === Column.COLOR) {
+	const renderColumn = (column: string, columnIndex: number) => {
+		if (columnIndex === Column.COLOR) {
 			const colors = column.split(',');
 
 			const manaIcons = colors.map((color) => `/images/${color}.svg`);
@@ -23,7 +24,7 @@
 			return `<span class="flex gap-x-1" >${images}</span>`;
 		}
 
-		if (index === Column.WINRATE) {
+		if (columnIndex === Column.WINRATE) {
 			const percentageNumber = Number(column);
 			if (percentageNumber > 50) {
 				return `<span class="text-green-200">${column}%</span>`;
@@ -44,43 +45,46 @@
 		selectedMana = event.detail;
 	};
 
-	const filterTableForMana = (selectedMana: Mana[]) =>
-		matches.slice(1).filter((row) => selectedMana.every((mana) => row[0].includes(mana)));
+	const filterTableForMana = (selectedMana: Mana[]) => {
+		const filteredContent = filterByMana(matches.slice(1), selectedMana);
+		if (sortLevel === SortLevel.DESC) {
+			return sortMatchesDesc(filteredContent, currentColumnIndex);
+		} else if (sortLevel === SortLevel.ASC) {
+			return sortMatchesAsc(filteredContent, currentColumnIndex);
+		} else {
+			return filteredContent;
+		}
+	};
 
-	const filterByColumn = (index: number) => {
-		if (index === Column.COLOR) {
+	const filterByColumn = (columnIndex: number) => {
+		if (columnIndex === Column.COLOR) {
 			return;
 		}
 
-		if (currentIndex !== index) {
-			sortLevel = SortLevel.OFF
+		if (currentColumnIndex !== columnIndex) {
+			sortLevel = SortLevel.OFF;
 		}
 
-		let filteredContent;
+		let filteredContent =
+			selectedMana.length > 0 ? filterByMana(matches.slice(1), selectedMana) : matches.slice(1);
+
 		if (sortLevel === SortLevel.OFF) {
-			filteredContent = matches
-				.slice(1)
-				.sort((matchA: any, matchB: any) => matchB[index] - matchA[index]);
-			sortLevel = SortLevel.DESC
-		} else if(sortLevel === SortLevel.DESC) {
-			filteredContent = matches
-				.slice(1)
-				.sort((matchA: any, matchB: any) => matchA[index] - matchB[index]);
-			sortLevel = SortLevel.ASC
+			filteredContent = sortMatchesDesc(filteredContent, columnIndex);
+			sortLevel = SortLevel.DESC;
+		} else if (sortLevel === SortLevel.DESC) {
+			filteredContent = sortMatchesAsc(filteredContent, columnIndex);
+			sortLevel = SortLevel.ASC;
 		} else {
-			filteredContent = matches.slice(1)
-			sortLevel = SortLevel.OFF
+			sortLevel = SortLevel.OFF;
 		}
 		tableBody = filteredContent;
-		currentIndex = index
+		currentColumnIndex = columnIndex;
 	};
 </script>
 
-
 <div class="flex flex-col justify-center w-full md:w-1/2 p-3 sm:p-0 mx-auto">
-	<ManaSelector on:changeMana={changeMana} />
+	<ManaSelector on:changeMana={changeMana} {selectedMana} />
 	<div class="overflow-y-auto h-[50vh]">
-
 		<table class="w-full">
 			<thead class="border-b">
 				{#each matches[0] as header, i}
@@ -91,7 +95,7 @@
 						on:click={() => filterByColumn(i)}
 					>
 						{header}
-						<FilterChevron columnIndex={i} {currentIndex} {sortLevel} />
+						<FilterChevron columnIndex={i} {currentColumnIndex} {sortLevel} />
 					</th>
 				{/each}
 			</thead>

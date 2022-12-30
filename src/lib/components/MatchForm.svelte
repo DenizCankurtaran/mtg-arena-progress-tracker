@@ -6,7 +6,7 @@
 	let selectedMana: Mana[] = [];
 	let valid = false;
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{ refresh: undefined; manaSelected: Mana[] }>();
 
 	const saveMatch = async (result: Result) => {
 		if (!valid) {
@@ -23,8 +23,7 @@
 			}
 		});
 		const responseResult = await response.json();
-		console.log(responseResult);
-		
+
 		if (responseResult.status === 200) {
 			dispatch('refresh');
 		}
@@ -37,6 +36,7 @@
 		} else {
 			valid = false;
 		}
+		dispatch('manaSelected', selectedMana);
 	};
 </script>
 

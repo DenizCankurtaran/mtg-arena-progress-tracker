@@ -1,8 +1,10 @@
 <script lang="ts">
 	import type { Mana } from '$lib/util/types';
+	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 
 	export let size: 'sm' | 'md' | 'lg' = 'sm';
+	export let selectedMana: Mana[] = [];
 
 	const dispatch = createEventDispatcher<{ changeMana: Mana[] }>();
 
@@ -14,6 +16,7 @@
 			selectedMana.push(mana);
 		}
 		manas = manas;
+
 		dispatch('changeMana', selectedMana);
 	};
 
@@ -48,7 +51,6 @@
 	};
 
 	let manas: Mana[] = ['white', 'black', 'green', 'red', 'blue'];
-	const selectedMana: Mana[] = [];
 
 	const style = getStyle();
 </script>

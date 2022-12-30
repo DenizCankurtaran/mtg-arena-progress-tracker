@@ -9,7 +9,7 @@ export default async (stats: Stats, matchUp: Match, result: Result) => {
 	});
 	const sheets = google.sheets({ version: 'v4', auth });
 
-	const rankUpdate = getUpdateRanksValues(stats, result)
+	const rankUpdate = getUpdateRanksValues(stats, result);
 
 	const response = await sheets.spreadsheets.values.batchUpdate({
 		spreadsheetId: SHEET_ID,
@@ -31,13 +31,11 @@ export default async (stats: Stats, matchUp: Match, result: Result) => {
 				},
 				{
 					majorDimension: 'ROWS',
-					values: [
-						rankUpdate.update
-					],
+					values: [rankUpdate.update],
 					range: `${SHEET_NAME}!${rankUpdate.range}`
 				}
 			]
 		}
 	});
-	return response
+	return response;
 };
