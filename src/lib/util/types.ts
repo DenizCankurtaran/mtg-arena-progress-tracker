@@ -8,10 +8,10 @@ export type Stats = {
 };
 
 export const isMatch = (match: any[]): match is Match =>
-	match.every((el) => typeof el === 'string');
+    match.every((el) => typeof el === 'string');
 
 export const isMatches = (matches: any[][]): matches is Match[] =>
-	matches.every((el) => isMatch(el));
+    matches.every((el) => isMatch(el));
 
 export enum Column {
 	COLOR = 0,

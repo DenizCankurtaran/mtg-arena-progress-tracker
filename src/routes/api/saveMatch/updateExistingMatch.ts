@@ -5,31 +5,31 @@ import getUpdateMatchValues from './getUpdateMatchValues';
 import getUpdateRanksValues from './getUpdateRanksValues';
 
 export default async (stats: Stats, matchUp: Match, result: Result) => {
-	const auth = await google.auth.getClient({
-		scopes: ['https://www.googleapis.com/auth/spreadsheets']
-	});
-	const sheets = google.sheets({ version: 'v4', auth });
+    const auth = await google.auth.getClient({
+        scopes: ['https://www.googleapis.com/auth/spreadsheets']
+    });
+    const sheets = google.sheets({ version: 'v4', auth });
 
-	const matchUpdate = getUpdateMatchValues(stats.matches, matchUp, result);
-	const rankUpdate = getUpdateRanksValues(stats, result);
+    const matchUpdate = getUpdateMatchValues(stats.matches, matchUp, result);
+    const rankUpdate = getUpdateRanksValues(stats, result);
 
-	const response = await sheets.spreadsheets.values.batchUpdate({
-		spreadsheetId: SHEET_ID,
-		requestBody: {
-			valueInputOption: 'USER_ENTERED',
-			data: [
-				{
-					majorDimension: 'ROWS',
-					values: [matchUpdate.update],
-					range: `${SHEET_NAME}!${matchUpdate.range}`
-				},
-				{
-					majorDimension: 'ROWS',
-					values: [rankUpdate.update],
-					range: `${SHEET_NAME}!${rankUpdate.range}`
-				}
-			]
-		}
-	});
-	return response;
+    const response = await sheets.spreadsheets.values.batchUpdate({
+        spreadsheetId: SHEET_ID,
+        requestBody: {
+            valueInputOption: 'USER_ENTERED',
+            data: [
+                {
+                    majorDimension: 'ROWS',
+                    values: [matchUpdate.update],
+                    range: `${SHEET_NAME}!${matchUpdate.range}`
+                },
+                {
+                    majorDimension: 'ROWS',
+                    values: [rankUpdate.update],
+                    range: `${SHEET_NAME}!${rankUpdate.range}`
+                }
+            ]
+        }
+    });
+    return response;
 };

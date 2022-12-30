@@ -9,45 +9,45 @@
 	const dispatch = createEventDispatcher<{ changeMana: Mana[] }>();
 
 	const handleClick = (mana: Mana) => {
-		if (selectedMana.includes(mana)) {
-			const index = selectedMana.indexOf(mana);
-			selectedMana.splice(index, 1);
-		} else {
-			selectedMana.push(mana);
-		}
-		manas = manas;
+	    if (selectedMana.includes(mana)) {
+	        const index = selectedMana.indexOf(mana);
+	        selectedMana.splice(index, 1);
+	    } else {
+	        selectedMana.push(mana);
+	    }
+	    manas = manas;
 
-		dispatch('changeMana', selectedMana);
+	    dispatch('changeMana', selectedMana);
 	};
 
 	const getStyle = () => {
-		if (size === 'md') {
-			return {
-				height: 'h-6',
-				width: 'w-6',
-				inset: 'inset-3',
-				glowHeight: 'h-5',
-				glowWidth: 'w-5',
-				glowInset: 'inset-3.5'
-			};
-		} else if (size === 'lg') {
-			return {
-				height: 'h-10',
-				width: 'w-10',
-				inset: 'inset-3',
-				glowHeight: 'h-10',
-				glowWidth: 'w-10',
-				glowInset: 'inset-3'
-			};
-		}
-		return {
-			height: 'h-4',
-			width: 'w-4',
-			inset: 'inset-3',
-			glowHeight: 'h-3',
-			glowWidth: 'w-3',
-			glowInset: 'inset-3.5'
-		};
+	    if (size === 'md') {
+	        return {
+	            height: 'h-6',
+	            width: 'w-6',
+	            inset: 'inset-3',
+	            glowHeight: 'h-5',
+	            glowWidth: 'w-5',
+	            glowInset: 'inset-3.5'
+	        };
+	    } else if (size === 'lg') {
+	        return {
+	            height: 'h-10',
+	            width: 'w-10',
+	            inset: 'inset-3',
+	            glowHeight: 'h-10',
+	            glowWidth: 'w-10',
+	            glowInset: 'inset-3'
+	        };
+	    }
+	    return {
+	        height: 'h-4',
+	        width: 'w-4',
+	        inset: 'inset-3',
+	        glowHeight: 'h-3',
+	        glowWidth: 'w-3',
+	        glowInset: 'inset-3.5'
+	    };
 	};
 
 	let manas: Mana[] = ['white', 'black', 'green', 'red', 'blue'];

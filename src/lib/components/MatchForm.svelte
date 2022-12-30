@@ -9,34 +9,34 @@
 	const dispatch = createEventDispatcher<{ refresh: undefined; manaSelected: Mana[] }>();
 
 	const saveMatch = async (result: Result) => {
-		if (!valid) {
-			return;
-		}
-		const response = await fetch('/api/saveMatch', {
-			method: 'POST',
-			body: JSON.stringify({
-				result,
-				matchUp: selectedMana
-			}),
-			headers: {
-				'content-type': 'application/json'
-			}
-		});
-		const responseResult = await response.json();
+	    if (!valid) {
+	        return;
+	    }
+	    const response = await fetch('/api/saveMatch', {
+	        method: 'POST',
+	        body: JSON.stringify({
+	            result,
+	            matchUp: selectedMana
+	        }),
+	        headers: {
+	            'content-type': 'application/json'
+	        }
+	    });
+	    const responseResult = await response.json();
 
-		if (responseResult.status === 200) {
-			dispatch('refresh');
-		}
+	    if (responseResult.status === 200) {
+	        dispatch('refresh');
+	    }
 	};
 
 	const changeMana = (event: CustomEvent<Mana[]>) => {
-		selectedMana = event.detail;
-		if (selectedMana.length > 0) {
-			valid = true;
-		} else {
-			valid = false;
-		}
-		dispatch('manaSelected', selectedMana);
+	    selectedMana = event.detail;
+	    if (selectedMana.length > 0) {
+	        valid = true;
+	    } else {
+	        valid = false;
+	    }
+	    dispatch('manaSelected', selectedMana);
 	};
 </script>
 

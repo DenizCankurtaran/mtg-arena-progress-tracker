@@ -9,8 +9,8 @@ type GetStatsResponse = {
 };
 
 export const load = (async ({ fetch }) => {
-	const response = await fetch('/api/getStats');
-	const { body }: GetStatsResponse = await response.json();
+    const response = await fetch('/api/getStats');
+    const { body }: GetStatsResponse = await response.json();
 
-	return { ...body };
+    return { ...body };
 }) satisfies PageServerLoad;

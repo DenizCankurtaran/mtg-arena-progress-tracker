@@ -11,23 +11,30 @@
 	let selectedMana: Mana[] = [];
 
 	const refresh = async () => {
-		const response = await fetch('/api/getStats');
+	    const response = await fetch('/api/getStats');
 
-		const result = await response.json();
-		ranks = result.body.ranks;
-		matches = result.body.matches;
+	    const result = await response.json();
+	    ranks = result.body.ranks;
+	    matches = result.body.matches;
+	    selectedMana = [];
 	};
 
 	const manaSelected = (event: CustomEvent<Mana[]>) => {
-		selectedMana = event.detail;
+	    selectedMana = event.detail;
 	};
 </script>
 
 <div>
 	{#key ranks}
-		<div class="flex justify-center gap-x-12 my-6">
-			<Rank {ranks} />
-			<MatchForm on:refresh={refresh} on:manaSelected={manaSelected} />
+		<div
+			class="flex justify-around gap-y-12 sm:gap-y-0 gap-x-4 my-6 w-full xl:w-1/2 p-3 sm:p-0 mx-auto flex-wrap sm:flex-nowrap "
+		>
+			<div>
+				<Rank {ranks} />
+			</div>
+			<div>
+				<MatchForm on:refresh={refresh} on:manaSelected={manaSelected} />
+			</div>
 		</div>
 
 		<MatchTable {matches} {selectedMana} />
