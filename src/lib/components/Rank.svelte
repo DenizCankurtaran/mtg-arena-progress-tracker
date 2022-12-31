@@ -13,7 +13,7 @@
 	let rankImage = `/images/${rank}.webp`;
 </script>
 
-<div class="flex gap-x-6 sm:gap-x-20 lg:gap-x-12">
+<div class="flex justify-around w-full sm:w-1/3">
 	<RankInformationDisplay rank={currentRank} />
 
 	<div class="flex justify-center align-middle">
