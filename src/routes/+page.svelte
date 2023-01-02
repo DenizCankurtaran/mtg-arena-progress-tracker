@@ -29,7 +29,7 @@
 		<div
 			class="flex justify-around gap-y-12 sm:gap-y-0 gap-x-4 my-6 w-full xl:w-1/2 p-3 sm:p-0 mx-auto flex-wrap sm:flex-nowrap "
 		>
-				<Rank {ranks} />
+				<Rank {ranks}/>
 				<MatchForm on:refresh={refresh} on:manaSelected={manaSelected} />
 		</div>
 

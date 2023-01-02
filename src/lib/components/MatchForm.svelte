@@ -40,7 +40,7 @@
 	};
 </script>
 
-<div>
+<div class="my-auto">
 	<ManaSelector on:changeMana={changeMana} size="md" />
 	<div class="flex justify-between mt-4">
 		<button
