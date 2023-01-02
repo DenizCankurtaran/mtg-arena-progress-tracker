@@ -32,7 +32,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"googleapis": "^110.0.0",
-		"moment": "^2.29.4"
+		"googleapis": "^110.0.0"
 	}
 }
