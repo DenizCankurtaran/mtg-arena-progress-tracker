@@ -50,7 +50,7 @@
 	    };
 	};
 
-	let manas: Mana[] = ['white', 'black', 'green', 'red', 'blue'];
+	let manas: Mana[] = ['white', 'black', 'green', 'red', 'blue', 'colorless'];
 
 	const style = getStyle();
 </script>

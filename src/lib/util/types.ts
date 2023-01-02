@@ -27,6 +27,6 @@ export enum SortLevel {
 	ASC = 2
 }
 
-export type Mana = 'white' | 'black' | 'green' | 'red' | 'blue';
+export type Mana = 'white' | 'black' | 'green' | 'red' | 'blue' | 'colorless';
 
 export type Result = 'WIN' | 'LOSS';
