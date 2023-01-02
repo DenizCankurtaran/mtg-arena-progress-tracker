@@ -1,38 +1,32 @@
-# create-svelte
+# Magic The Gathering Arena progress tracker
+A project to keep track of how much progess was made in MTG: Arena.
+Progress is tracked inside google sheets.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+![Overview](./images/Overview.png)
 
-## Creating a project
+![Table](./images/Table.png)
 
-If you're seeing this, you've probably already done this step. Congrats!
+# Getting started
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+## Requirements
+1. google project with access to google sheets api
+2. service account credentials file
+3. `.env` file containing configuration
 
-# create a new project in my-app
-npm create svelte@latest my-app
 ```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+SHEET_ID=<ID of google sheets table>
+SHEET_NAME=<Sheet name>
+GOOGLE_APPLICATION_CREDENTIALS=<Path to service account credentials file, e.g. ./secrets.json>
 ```
+### Development
+ - `npm run dev`
 
-## Building
+### Production
+ - `npm run build`
+ - `node ./build`
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+# Todo:
+- [ ] rank history table
+- [ ] Link to google sheets table
+- [ ] Rank down always happen if a loss occurs
+- [ ] tests
