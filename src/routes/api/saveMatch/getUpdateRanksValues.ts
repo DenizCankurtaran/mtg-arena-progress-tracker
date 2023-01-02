@@ -1,49 +1,50 @@
+import { formatRank } from '$lib/util/formatStats';
 import type { Result, Stats } from '$lib/util/types';
 
 const calculateTier = (oldTier: number, result: Result) => {
     if (result === 'LOSS') {
         switch (oldTier) {
-        case 1:
-            return '2';
-        case 2:
-            return '3';
-        case 3:
-            return '4';
-        case 4:
-            return '4';
-        default:
-            return '';
+            case 1:
+                return '2';
+            case 2:
+                return '3';
+            case 3:
+                return '4';
+            case 4:
+                return '4';
+            default:
+                return '';
         }
     } else {
         switch (oldTier) {
-        case 4:
-            return '3';
-        case 3:
-            return '2';
-        case 2:
-            return '1';
-        case 1:
-            return '4';
-        default:
-            return '';
+            case 4:
+                return '3';
+            case 3:
+                return '2';
+            case 2:
+                return '1';
+            case 1:
+                return '4';
+            default:
+                return '';
         }
     }
 };
 
 const calculateRank = (rank: string) => {
     switch (rank) {
-    case 'b':
-        return 's';
-    case 's':
-        return 'g';
-    case 'g':
-        return 'p';
-    case 'p':
-        return 'd';
-    case 'd':
-        return 'm';
-    default:
-        return '';
+        case 'b':
+            return 's';
+        case 's':
+            return 'g';
+        case 'g':
+            return 'p';
+        case 'p':
+            return 'd';
+        case 'd':
+            return 'm';
+        default:
+            return '';
     }
 };
 
@@ -104,23 +105,31 @@ export default (stats: Stats, result: Result) => {
             ]
         };
     } else {
-        let [date, rankStart, rank, wins, loses, games, winRate] = lastRow;
+        const rank = formatRank(lastRow);
 
-        const newGames = Number(games) + 1;
+        const newGames = Number(rank.games) + 1;
         if (result === 'WIN') {
-            const newWins = Number(wins) + 1;
-            wins = newWins.toString();
-            winRate = ((newWins / newGames) * 100).toFixed(2).toString();
+            const newWins = Number(rank.wins) + 1;
+            rank.wins = newWins.toString();
+            rank.winRate = ((newWins / newGames) * 100).toFixed(2).toString();
         }
 
         if (result === 'LOSS') {
-            loses = (Number(loses) + 1).toString();
-            winRate = ((Number(wins) / newGames) * 100).toFixed(2).toString();
+            rank.loses = (Number(rank.loses) + 1).toString();
+            rank.winRate = ((Number(rank.wins) / newGames) * 100).toFixed(2).toString();
         }
 
         return {
             range: `H${stats.ranks.length}:N${stats.ranks.length}`,
-            update: [date, rankStart, getNewRank(rank, result), wins, loses, newGames.toString(), winRate]
+            update: [
+                rank.date,
+                rank.rankStart,
+                getNewRank(rank.rank, result),
+                rank.wins,
+                rank.loses,
+                newGames.toString(),
+                rank.winRate
+            ]
         };
     }
 };

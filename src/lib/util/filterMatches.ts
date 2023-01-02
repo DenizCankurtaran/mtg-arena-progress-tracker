@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Mana, Match } from './types';
 
 export const sortMatchesDesc = (matches: Match[], columnIndex: number) =>

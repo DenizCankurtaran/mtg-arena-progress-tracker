@@ -1,6 +1,4 @@
 import { GOOGLE_APPLICATION_CREDENTIALS, SHEET_ID, SHEET_NAME } from '$env/static/private';
-import type { Match } from '$lib/util/types';
-import { json } from '@sveltejs/kit';
 import { google } from 'googleapis';
 
 export default async () => {
@@ -19,8 +17,8 @@ export default async () => {
 
     if (
         !response.data.valueRanges ||
-		!response.data.valueRanges[0].values ||
-		!response.data.valueRanges[1].values
+        !response.data.valueRanges[0].values ||
+        !response.data.valueRanges[1].values
     ) {
         return undefined;
     }

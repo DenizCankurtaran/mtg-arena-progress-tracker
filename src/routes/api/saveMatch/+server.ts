@@ -1,4 +1,4 @@
-import { GOOGLE_APPLICATION_CREDENTIALS, SHEET_ID, SHEET_NAME } from '$env/static/private';
+import { GOOGLE_APPLICATION_CREDENTIALS } from '$env/static/private';
 import getStats from '$lib/server/getStats';
 import { json, type RequestHandler } from '@sveltejs/kit';
 import getColorEntry from './getColorEntry';
@@ -17,12 +17,12 @@ export const POST: RequestHandler = async ({ request }) => {
 
     const colors = getColorEntry(stats.matches, matchUp);
     if (colors.length === 0) {
-        const response = await insertNewMatch(stats, matchUp, result);
+        await insertNewMatch(stats, matchUp, result);
 
         return json({ status: 200, body: 'Match added' });
     }
     if (colors.length === 1) {
-        const response = await updateExistingMatch(stats, matchUp, result);
+        await updateExistingMatch(stats, matchUp, result);
 
         return json({ status: 200, body: 'Match updated' });
     }

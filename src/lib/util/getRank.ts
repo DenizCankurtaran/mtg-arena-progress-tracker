@@ -2,18 +2,18 @@ import type { Rank } from './types';
 
 const getRankName = (rankLetter: string) => {
     switch (rankLetter) {
-    case 'b':
-        return 'Bronze';
-    case 's':
-        return 'Silver';
-    case 'g':
-        return 'Gold';
-    case 'p':
-        return 'Platinum';
-    case 'd':
-        return 'Diamond';
-    case 'm':
-        return 'Mythic';
+        case 'b':
+            return 'Bronze';
+        case 's':
+            return 'Silver';
+        case 'g':
+            return 'Gold';
+        case 'p':
+            return 'Platinum';
+        case 'd':
+            return 'Diamond';
+        case 'm':
+            return 'Mythic';
     }
 };
 
