@@ -63,12 +63,7 @@
             {getRank(currentRank)}
         </div>
         <div class="space-y-2 w-20 mx-auto">
-            <img
-                class="h-20 mx-auto"
-                src={rankImage}
-                alt="Current Rank"
-                title="Current Rank"
-            />
+            <img class="h-20 mx-auto" src={rankImage} alt="Current Rank" title="Current Rank" />
             <Steps {step} />
         </div>
     </div>
