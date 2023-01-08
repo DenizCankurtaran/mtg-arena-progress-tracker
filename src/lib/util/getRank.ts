@@ -25,3 +25,12 @@ export default (rank: Rank) => {
 
     return `${rankName} Tier ${rankInformation[1]}`;
 };
+
+export const getStartingRank = (rank: Rank) => {
+    const currentStats = rank[1].split('-');
+    const rankInformation = currentStats[0].split('');
+
+    const rankName = getRankName(rankInformation[0]);
+
+    return `${rankName} Tier ${rankInformation[1]}`;
+};
