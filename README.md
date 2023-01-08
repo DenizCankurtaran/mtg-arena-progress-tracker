@@ -21,6 +21,8 @@ GOOGLE_APPLICATION_CREDENTIALS=<Path to service account credentials file, e.g. .
 ### Development
  - `npm run dev`
 
+Commits require linting guidelines. Run linting with `npm run lint`, apply linting with `npm run format`.
+
 ### Production
  - `npm run build`
  - `node ./build`
